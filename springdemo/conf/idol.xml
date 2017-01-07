@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="duke"-->
+          <!--class="com.lyx.PoeticJuggler">-->
+        <!--<constructor-arg value="15"/>-->
+        <!--<constructor-arg ref="sonnet29"/>-->
+    <!--</bean>-->
+
+    <bean id="sonnet29"
+          class="com.lyx.Sonnet29" />
+
+    <bean id="theStage"
+          class="com.lyx.Stage"
+          factory-method="getInstance" />
+
+    <bean id="saxophone"
+          class="com.lyx.Saxophone"/>
+
+    <bean id="duke"
+          class="com.lyx.Instrumentalist"
+          p:song="Jingle Bells"
+          p:age="37"
+          p:instrument-ref="saxophone" />
+        <!--<property name="song" value="Jingle Bells" />-->
+        <!--<property name="age" value="37" />-->
+        <!--<property name="instrument" ref="saxophone"/>-->
+    <!--</bean>-->
+
+
+
+</beans>
