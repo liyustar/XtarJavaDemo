@@ -51,5 +51,22 @@
         </aop:aspect>
     </aop:config>
 
+    <bean id="magician"
+          class="com.lyx.Magician" />
+
+    <bean id="volunteer"
+          class="com.lyx.Volunteer" />
+
+    <aop:config>
+        <aop:aspect ref="magician">
+            <aop:pointcut id="thinking"
+                          expression="execution(* com.lyx.iface.Thinker.thinkOfSomething(String)) and args(thoughts)" />
+
+            <aop:before pointcut-ref="thinking"
+                        method="interceptThoughts"
+                        arg-names="thoughts" />
+        </aop:aspect>
+    </aop:config>
+
 
 </beans>
