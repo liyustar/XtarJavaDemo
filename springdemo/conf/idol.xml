@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--<bean id="duke"-->
           <!--class="com.lyx.PoeticJuggler">-->
@@ -10,12 +14,12 @@
         <!--<constructor-arg ref="sonnet29"/>-->
     <!--</bean>-->
 
-    <bean id="sonnet29"
-          class="com.lyx.Sonnet29" />
+    <!--<bean id="sonnet29"-->
+          <!--class="com.lyx.Sonnet29" />-->
 
-    <bean id="theStage"
-          class="com.lyx.Stage"
-          factory-method="getInstance" />
+    <!--<bean id="theStage"-->
+          <!--class="com.lyx.Stage"-->
+          <!--factory-method="getInstance" />-->
 
     <bean id="saxophone"
           class="com.lyx.Saxophone"/>
@@ -30,6 +34,22 @@
         <!--<property name="instrument" ref="saxophone"/>-->
     <!--</bean>-->
 
+    <bean id="audience"
+          class="com.lyx.Audience" />
+
+
+    <aop:config>
+        <aop:aspect ref="audience">
+
+            <aop:pointcut id="performance" expression="execution(* com.lyx.iface.Performer.perform(..))" />
+
+            <aop:before pointcut-ref="performance" method="takeSeats" />
+            <aop:before pointcut-ref="performance" method="turnOffCellPhones" />
+            <aop:after-returning pointcut-ref="performance" method="applaud" />
+            <aop:after-throwing pointcut-ref="performance" method="demandRefund" />
+
+        </aop:aspect>
+    </aop:config>
 
 
 </beans>
